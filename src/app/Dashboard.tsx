@@ -40,8 +40,8 @@ const PRESET_LOCATIONS = [
 ];
 
 export default function Dashboard() {
-  const [keywords, setKeywords] = useState("AI/ML Engineer");
-  const [location, setLocation] = useState("London");
+  const [keywords, setKeywords] = useState("");
+  const [location, setLocation] = useState("");
   const [maxJobs, setMaxJobs] = useState(25);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
