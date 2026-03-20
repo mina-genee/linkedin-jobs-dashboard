@@ -198,32 +198,38 @@ export default function Dashboard() {
           <form className="search-form" onSubmit={handleSearch}>
           <div className="input-group">
             <label>Keywords</label>
-            <select 
+            <input 
+              type="text"
+              list="keywords-list"
               value={keywords} 
               onChange={(e) => setKeywords(e.target.value)} 
               className="form-select"
+              placeholder="e.g. Graphic Designer"
               required
-            >
-              <option value="" disabled>Select Keywords</option>
+            />
+            <datalist id="keywords-list">
               {PRESET_KEYWORDS.map(k => (
-                <option key={k} value={k}>{k}</option>
+                <option key={k} value={k} />
               ))}
-            </select>
+            </datalist>
           </div>
 
           <div className="input-group">
             <label>Location</label>
-            <select 
+            <input 
+              type="text"
+              list="locations-list"
               value={location} 
               onChange={(e) => setLocation(e.target.value)} 
               className="form-select"
+              placeholder="e.g. Tokyo"
               required
-            >
-              <option value="" disabled>Select Location</option>
+            />
+            <datalist id="locations-list">
               {PRESET_LOCATIONS.map(l => (
-                <option key={l} value={l}>{l}</option>
+                <option key={l} value={l} />
               ))}
-            </select>
+            </datalist>
           </div>
 
           <div className="input-group" style={{ flex: '0.4' }}>
