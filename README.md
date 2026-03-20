@@ -8,7 +8,15 @@ A modern, high-performance web dashboard that dynamically scrapes LinkedIn for j
 - **Dual Display Modes:** View jobs in a responsive "Split View" with sliding floating modals, or a highly scannable "Spreadsheet View".
 - **Mobile Optimized:** 100% responsive layout that transforms wide data tables into stacked cards on mobile devices for perfect UX.
 
-## How to Run Locally
+## Fast-Track with Antigravity 🤖
+If you use Google DeepMind's **Antigravity** agent, you can deploy this project locally without touching the terminal at all!
+
+Just copy-paste this prompt into your Antigravity chat:
+> "Clone `https://github.com/mina-genee/linkedin-jobs-dashboard.git` into my downloads folder, install the npm dependencies, and start the development server for me."
+
+Antigravity will automatically scaffold the entire environment and launch the app!
+
+## Manual Local Setup
 
 ### Prerequisites
 Make sure you have [Node.js](https://nodejs.org/en) installed on your machine.
