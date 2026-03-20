@@ -292,8 +292,10 @@ export default function Dashboard() {
           </div>
 
           {selectedJob && (
-            <div className="job-detail-pane glass-panel">
-              <h2>{selectedJob.title}</h2>
+            <>
+              <div className="mobile-overlay" onClick={() => setSelectedJob(null)}></div>
+              <div className="job-detail-pane glass-panel">
+                <h2>{selectedJob.title}</h2>
               <div className="detail-company">{selectedJob.company} &bull; {selectedJob.location}</div>
               <a href={selectedJob.job_link} target="_blank" rel="noopener noreferrer" className="apply-btn">Apply via LinkedIn ↗</a>
               
@@ -331,6 +333,7 @@ export default function Dashboard() {
                 )}
               </div>
             </div>
+            </>
           )}
         </div>
       )}
@@ -385,12 +388,12 @@ export default function Dashboard() {
 
                 return (
                   <tr key={job.job_link}>
-                    <td style={{fontWeight: 500}}>{job.company}</td>
-                    <td className="table-title">{job.title}</td>
-                    <td>{job.location}</td>
-                    <td style={{color: 'var(--accent)', fontWeight: 600}}>{comp}</td>
-                    <td className="table-summary">{snippet}</td>
-                    <td>
+                    <td data-label="Company" style={{fontWeight: 500}}>{job.company}</td>
+                    <td data-label="Title" className="table-title">{job.title}</td>
+                    <td data-label="Location">{job.location}</td>
+                    <td data-label="Salary/Comp" style={{color: 'var(--accent)', fontWeight: 600}}>{comp}</td>
+                    <td data-label="Summary" className="table-summary">{snippet}</td>
+                    <td data-label="Action">
                       <a href={job.job_link} target="_blank" rel="noopener noreferrer" className="table-link">Apply ↗</a>
                     </td>
                   </tr>

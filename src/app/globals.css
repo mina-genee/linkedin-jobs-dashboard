@@ -337,64 +337,96 @@ button[type="submit"]:disabled { opacity: 0.7; cursor: not-allowed; box-shadow: 
   width: 16px; height: 16px; border: 2px solid rgba(0,0,0,0.1); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block;
 }
 
-/* Mobile Optimization */
+.mobile-overlay { display: none; }
+
+/* Mobile Optimization: Real Popups & Stacked Data Cards */
 @media (max-width: 900px) {
   main {
     padding: 1.5rem 1rem;
   }
-  
-  h1 {
-    font-size: 1.6rem;
-  }
-  
-  .glass-panel {
-    padding: 1.25rem;
-  }
+  h1 { font-size: 1.6rem; }
+  .glass-panel { padding: 1.25rem; }
 
+  /* Split View - Normal List behavior */
   .results-container.split-view {
-    flex-direction: column-reverse;
+    display: block;
   }
-  
   .job-list {
     width: 100%;
-    height: 60vh;
-    padding-right: 0.25rem;
+    height: auto;
+    max-height: none;
+    padding-right: 0;
+  }
+  
+  /* Split View - True Modal Popup */
+  .mobile-overlay {
+    display: block;
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    z-index: 999;
   }
   
   .job-detail-pane {
-    width: 100%;
-    position: static;
-    height: auto;
-    max-height: 80vh;
-    padding: 1.25rem;
-    margin-bottom: 2rem;
+    position: fixed;
+    top: 5vh; left: 5vw;
+    width: 90vw; height: 90vh;
+    z-index: 1000;
+    margin: 0;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    background: var(--surface);
+    overflow-y: auto;
   }
   
-  .close-btn {
-    top: 0.5rem;
-    right: 0.5rem;
-  }
+  .close-btn { top: 1rem; right: 1rem; font-size: 1.8rem; }
   
-  .view-toggles {
+  .view-toggles { display: flex; flex-direction: stretch; }
+  .view-toggles button { flex: 1; padding: 0.75rem 0.5rem; text-align: center; }
+  
+  .job-grid { grid-template-columns: 1fr; }
+  .job-criteria { grid-template-columns: 1fr; }
+  
+  /* Spreadsheet Mobile Optimization - Table to Cards */
+  .table-container {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+  .jobs-table, .jobs-table thead, .jobs-table tbody, .jobs-table th, .jobs-table td, .jobs-table tr {
+    display: block;
+  }
+  .jobs-table thead tr {
+    position: absolute; top: -9999px; left: -9999px;
+  }
+  .jobs-table tr {
+    margin-bottom: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .jobs-table td {
+    padding: 1rem 1.25rem;
+    border: none;
+    border-bottom: 1px solid #f3f4f6;
     display: flex;
-    flex-direction: stretch;
+    flex-direction: column;
+    text-align: left;
   }
-  
-  .view-toggles button {
-    flex: 1;
-    padding: 0.75rem 0.5rem;
-    text-align: center;
+  .jobs-table td:last-child {
+    border-bottom: 0;
   }
-  
-  .job-grid {
-    grid-template-columns: 1fr;
+  .jobs-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
   }
-
-  .job-criteria {
-    grid-template-columns: 1fr;
-  }
-  
   .table-full-summary {
-    max-height: 300px;
+    max-height: 400px;
   }
 }
