@@ -21,15 +21,22 @@ interface JobDetail {
 const PRESET_KEYWORDS = [
   "AI/ML Engineer",
   "Frontend Developer",
+  "Backend Developer",
+  "Full Stack Developer",
   "Product Manager",
-  "Data Scientist"
+  "Data Scientist",
+  "DevOps Engineer",
+  "Designer"
 ];
 
 const PRESET_LOCATIONS = [
   "London",
   "New York",
   "Remote",
-  "San Francisco"
+  "San Francisco",
+  "Seattle",
+  "Toronto",
+  "Berlin"
 ];
 
 export default function Dashboard() {
@@ -153,11 +160,6 @@ export default function Dashboard() {
          
          // Auto-collapse search to maximize screen space for results
          setIsSearchExpanded(false);
-         
-         // Automatically select the first job to show the horizontal view
-         if (fetchedJobs.length > 0 && viewMode === 'split') {
-           fetchJobDetails(fetchedJobs[0]);
-         }
       }
     } catch (err: any) {
       if (err.name === 'AbortError') {
@@ -196,48 +198,32 @@ export default function Dashboard() {
           <form className="search-form" onSubmit={handleSearch}>
           <div className="input-group">
             <label>Keywords</label>
-            <input 
-              type="text" 
+            <select 
               value={keywords} 
               onChange={(e) => setKeywords(e.target.value)} 
-              placeholder="e.g. Software Engineer"
+              className="form-select"
               required
-            />
-            <div className="toggles">
+            >
+              <option value="" disabled>Select Keywords</option>
               {PRESET_KEYWORDS.map(k => (
-                <button 
-                  key={k} 
-                  type="button" 
-                  className={`toggle-btn ${keywords === k ? 'active' : ''}`}
-                  onClick={() => { setKeywords(k); }}
-                >
-                  {k}
-                </button>
+                <option key={k} value={k}>{k}</option>
               ))}
-            </div>
+            </select>
           </div>
 
           <div className="input-group">
             <label>Location</label>
-            <input 
-              type="text" 
+            <select 
               value={location} 
               onChange={(e) => setLocation(e.target.value)} 
-              placeholder="e.g. London"
+              className="form-select"
               required
-            />
-             <div className="toggles">
+            >
+              <option value="" disabled>Select Location</option>
               {PRESET_LOCATIONS.map(l => (
-                <button 
-                  key={l} 
-                  type="button" 
-                  className={`toggle-btn ${location === l ? 'active' : ''}`}
-                  onClick={() => { setLocation(l); }}
-                >
-                  {l}
-                </button>
+                <option key={l} value={l}>{l}</option>
               ))}
-            </div>
+            </select>
           </div>
 
           <div className="input-group" style={{ flex: '0.4' }}>

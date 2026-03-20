@@ -69,7 +69,7 @@ h1 {
 .input-group { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
 label { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
-input[type="text"], input[type="number"] {
+input[type="text"], input[type="number"], .form-select {
   background: var(--surface);
   border: 1px solid var(--surface-border);
   color: var(--text-main);
@@ -77,31 +77,13 @@ input[type="text"], input[type="number"] {
   border-radius: 4px;
   font-size: 0.95rem;
   transition: border-color 0.2s ease, box-shadow 0.2s;
+  width: 100%;
 }
-input[type="text"]:focus, input[type="number"]:focus {
+input[type="text"]:focus, input[type="number"]:focus, .form-select:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
   outline: none;
 }
-
-.toggles { display: flex; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap; }
-.toggle-btn {
-  background: var(--surface);
-  border: 1px solid var(--surface-border);
-  color: var(--text-muted);
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-weight: 500;
-}
-.toggle-btn.active {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #ffffff;
-}
-.toggle-btn:hover:not(.active) { background: var(--surface-hover); color: var(--text-main); }
 
 button[type="submit"] {
   background: var(--primary);
