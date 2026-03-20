@@ -200,36 +200,46 @@ export default function Dashboard() {
             <label>Keywords</label>
             <input 
               type="text"
-              list="keywords-list"
               value={keywords} 
               onChange={(e) => setKeywords(e.target.value)} 
               className="form-select"
-              placeholder="e.g. Graphic Designer"
+              placeholder="Type custom keywords..."
+              style={{ marginBottom: '0.4rem' }}
               required
             />
-            <datalist id="keywords-list">
+            <select 
+              value={PRESET_KEYWORDS.includes(keywords) ? keywords : ""} 
+              onChange={(e) => setKeywords(e.target.value)} 
+              className="form-select"
+            >
+              <option value="" disabled>-- Or select a preset --</option>
               {PRESET_KEYWORDS.map(k => (
-                <option key={k} value={k} />
+                <option key={k} value={k}>{k}</option>
               ))}
-            </datalist>
+            </select>
           </div>
 
           <div className="input-group">
             <label>Location</label>
             <input 
               type="text"
-              list="locations-list"
               value={location} 
               onChange={(e) => setLocation(e.target.value)} 
               className="form-select"
-              placeholder="e.g. Tokyo"
+              placeholder="Type a custom location..."
+              style={{ marginBottom: '0.4rem' }}
               required
             />
-            <datalist id="locations-list">
+            <select 
+              value={PRESET_LOCATIONS.includes(location) ? location : ""} 
+              onChange={(e) => setLocation(e.target.value)} 
+              className="form-select"
+            >
+              <option value="" disabled>-- Or select a preset --</option>
               {PRESET_LOCATIONS.map(l => (
-                <option key={l} value={l} />
+                <option key={l} value={l}>{l}</option>
               ))}
-            </datalist>
+            </select>
           </div>
 
           <div className="input-group" style={{ flex: '0.4' }}>
