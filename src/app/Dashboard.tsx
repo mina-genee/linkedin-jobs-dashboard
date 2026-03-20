@@ -208,8 +208,10 @@ export default function Dashboard() {
               required
             />
             <select 
-              value={PRESET_KEYWORDS.includes(keywords) ? keywords : ""} 
-              onChange={(e) => setKeywords(e.target.value)} 
+              value=""
+              onChange={(e) => {
+                if (e.target.value) setKeywords(e.target.value);
+              }} 
               className="form-select"
             >
               <option value="" disabled>-- Or select a preset --</option>
@@ -231,8 +233,10 @@ export default function Dashboard() {
               required
             />
             <select 
-              value={PRESET_LOCATIONS.includes(location) ? location : ""} 
-              onChange={(e) => setLocation(e.target.value)} 
+              value=""
+              onChange={(e) => {
+                if (e.target.value) setLocation(e.target.value);
+              }} 
               className="form-select"
             >
               <option value="" disabled>-- Or select a preset --</option>
