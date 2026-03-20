@@ -230,9 +230,15 @@ button[type="submit"]:disabled { opacity: 0.7; cursor: not-allowed; box-shadow: 
 }
 
 .close-btn {
-  position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer;
+  position: absolute; top: 1rem; right: 1rem;
+  background: var(--surface-hover); border: 1px solid var(--surface-border);
+  color: var(--text-muted); cursor: pointer;
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; justify-content: center; align-items: center;
+  transition: all 0.2s ease;
+  z-index: 10;
 }
-.close-btn:hover { color: var(--text-main); }
+.close-btn:hover { color: var(--text-main); background: #e5e7eb; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
 
 .job-detail-pane h2 { font-size: 1.4rem; margin-right: 2rem; margin-bottom: 0.4rem; color: var(--text-main); }
 .detail-company { font-size: 1rem; color: var(--primary); margin-bottom: 1.25rem; font-weight: 500; }
@@ -378,9 +384,18 @@ button[type="submit"]:disabled { opacity: 0.7; cursor: not-allowed; box-shadow: 
     border-radius: 12px;
     background: var(--surface);
     overflow-y: auto;
+    padding-top: 3.5rem;
   }
   
-  .close-btn { top: 1rem; right: 1rem; font-size: 1.8rem; }
+  .close-btn { 
+    top: 0.75rem; right: 0.75rem; 
+    background: transparent;
+    color: var(--text-main);
+    border: none;
+    box-shadow: none;
+    width: 44px; height: 44px;
+    background: #f3f4f6;
+  }
   
   .view-toggles { display: flex; flex-direction: stretch; }
   .view-toggles button { flex: 1; padding: 0.75rem 0.5rem; text-align: center; }

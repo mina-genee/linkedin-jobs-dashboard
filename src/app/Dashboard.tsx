@@ -51,6 +51,7 @@ export default function Dashboard() {
   const fetchedHrefs = useRef<Set<string>>(new Set());
   
   const [expandedSummaries, setExpandedSummaries] = useState<Set<string>>(new Set());
+  const [isSearchExpanded, setIsSearchExpanded] = useState(true);
   
   const toggleSummary = (link: string) => {
     setExpandedSummaries(prev => {
@@ -150,6 +151,10 @@ export default function Dashboard() {
              setError(`Partial results loaded. ${data.error}`);
          }
          
+         // Auto-collapse search to maximize screen space for results
+         setIsSearchExpanded(false);
+         
+         // Automatically select the first job to show the horizontal view
          if (fetchedJobs.length > 0 && viewMode === 'split') {
            fetchJobDetails(fetchedJobs[0]);
          }
@@ -176,7 +181,19 @@ export default function Dashboard() {
       </header>
 
       <div className="glass-panel">
-        <form className="search-form" onSubmit={handleSearch}>
+        <div 
+          style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', marginBottom: isSearchExpanded ? '1.5rem' : '0' }}
+          onClick={() => setIsSearchExpanded(!isSearchExpanded)}
+        >
+          <h2 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--text-main)', fontWeight: 600 }}>
+            <svg style={{display:'inline', marginRight:'0.5rem', verticalAlign:'sub'}} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            Search Parameters
+          </h2>
+          <span style={{ fontSize: '1.2rem', color: 'var(--text-muted)' }}>{isSearchExpanded ? '▲' : '▼'}</span>
+        </div>
+
+        {isSearchExpanded && (
+          <form className="search-form" onSubmit={handleSearch}>
           <div className="input-group">
             <label>Keywords</label>
             <input 
@@ -238,6 +255,7 @@ export default function Dashboard() {
             {loading ? <div className="spinner"></div> : "Scrape Jobs"}
           </button>
         </form>
+        )}
       </div>
 
       {error  && <div className="error-message">{error}</div>}
@@ -295,6 +313,14 @@ export default function Dashboard() {
             <>
               <div className="mobile-overlay" onClick={() => setSelectedJob(null)}></div>
               <div className="job-detail-pane glass-panel">
+                <button 
+                  className="close-btn" 
+                  onClick={() => setSelectedJob(null)}
+                  aria-label="Close details"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+                
                 <h2>{selectedJob.title}</h2>
               <div className="detail-company">{selectedJob.company} &bull; {selectedJob.location}</div>
               <a href={selectedJob.job_link} target="_blank" rel="noopener noreferrer" className="apply-btn">Apply via LinkedIn ↗</a>
